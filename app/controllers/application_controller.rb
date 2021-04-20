@@ -32,7 +32,7 @@ class ApplicationController < ActionController::API
 
   def auth_header
     auth = request.headers['Authorization']
-    return auth.split.last if auth_token.present?
+    return auth.split.last if auth.present?
 
     @errors[:token] = 'Missing'
     nil
