@@ -6,7 +6,7 @@ class JsonWebToken
       payload[:exp] = exp.to_i
       JWT.encode(
         payload,
-        Rails.application.secrets.secret_key_base,
+        Rails.application.secret_key_base,
         'HS256',
         { typ: 'JWT' }
       )
@@ -14,7 +14,7 @@ class JsonWebToken
 
     def decode(token)
       body =
-        JWT.decode(token, Rails.application.secrets.secret_key_base)
+        JWT.decode(token, Rails.application.secret_key_base)
       puts "body: #{body}"
       HashWithIndifferentAccess.new(body.first)
     rescue JWT::DecodeError => e
