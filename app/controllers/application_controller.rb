@@ -24,6 +24,8 @@ class ApplicationController < ActionController::API
 
   def find_user
     token = JsonWebToken.decode(auth_header)
+    puts "=>=>=>=>=>=> token: #{token}"
+    puts "=>=>=>=>=>=> uuid: #{token[:user_id]}"
     return User.find(token[:user_id]) if token.present?
 
     @errors[:token] ||= 'Invalid'
@@ -32,6 +34,7 @@ class ApplicationController < ActionController::API
 
   def auth_header
     auth = request.headers['Authorization']
+    puts "=>=>=>=>=>=> auth: #{auth}, and split:#{auth.split.last}"
     return auth.split.last if auth.present?
 
     @errors[:token] = 'Missing'
