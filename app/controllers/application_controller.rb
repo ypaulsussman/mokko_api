@@ -34,8 +34,8 @@ class ApplicationController < ActionController::API
 
   def auth_header
     auth = request.headers['Authorization']
-    puts "=>=>=>=>=>=> auth: #{auth}, and split:#{auth.split.last}"
-    return auth.split.last if auth.present?
+    puts "=>=>=>=>=>=> auth: #{auth}, and split:#{auth.split('.').last}"
+    return auth.split('.').last if auth.present?
 
     @errors[:token] = 'Missing'
     nil
