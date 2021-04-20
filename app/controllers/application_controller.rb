@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
   end
 
   def lander
-    render json: { 'your_token': 'is rad!' }
+    render json: { your_token: 'is rad!' }
   end
 
   private
@@ -31,9 +31,8 @@ class ApplicationController < ActionController::API
   end
 
   def auth_header
-    if request.headers['Authorization'].present?
-      return request.headers['Authorization'].split(' ').last
-    end
+    auth = request.headers['Authorization']
+    return auth.split.last if auth_token.present?
 
     @errors[:token] = 'Missing'
     nil
