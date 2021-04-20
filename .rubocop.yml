@@ -1,0 +1,37 @@
+# inherit_from: ../.rubocop.yml
+
+AllCops:
+  Exclude:
+    - "vendor/**/*"
+    - "spec/fixtures/**/*"
+    - "tmp/**/*"
+    - "db/schema.rb"
+  NewCops: "enable"
+  TargetRubyVersion: 3.0.1
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 100
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 250
+
+Metrics/MethodLength:
+  Max: 50
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
