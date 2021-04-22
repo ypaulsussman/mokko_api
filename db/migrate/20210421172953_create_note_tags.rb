@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateNoteTags < ActiveRecord::Migration[6.1]
   def change
     create_table :note_tags, id: :uuid do |t|

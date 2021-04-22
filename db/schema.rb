@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_172953) do
+ActiveRecord::Schema.define(version: 2021_04_22_163819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 2021_04_21_172953) do
   end
 
   create_table "note_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "prompt_id", null: false
     t.uuid "note_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "tag_id", null: false
     t.index ["note_id"], name: "index_note_tags_on_note_id"
-    t.index ["prompt_id"], name: "index_note_tags_on_prompt_id"
+    t.index ["tag_id"], name: "index_note_tags_on_tag_id"
   end
 
   create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -90,6 +90,6 @@ ActiveRecord::Schema.define(version: 2021_04_21_172953) do
   add_foreign_key "note_prompts", "notes"
   add_foreign_key "note_prompts", "prompts"
   add_foreign_key "note_tags", "notes"
-  add_foreign_key "note_tags", "prompts"
+  add_foreign_key "note_tags", "tags"
   add_foreign_key "notes", "decks"
 end
