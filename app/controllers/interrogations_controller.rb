@@ -39,13 +39,14 @@ class InterrogationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_interrogation
-      @interrogation = Interrogation.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def interrogation_params
-      params.require(:interrogation).permit(:note_id, :prompt_id, :content, :occurred_on)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_interrogation
+    @interrogation = Interrogation.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def interrogation_params
+    params.require(:interrogation).permit(:note_id, :prompt_id, :content, :occurred_on)
+  end
 end

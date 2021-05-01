@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PromptsController < ApplicationController
   before_action :set_prompt, only: [:show, :update, :destroy]
 
@@ -39,13 +41,14 @@ class PromptsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_prompt
-      @prompt = Prompt.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def prompt_params
-      params.require(:prompt).permit(:content)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_prompt
+    @prompt = Prompt.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def prompt_params
+    params.require(:prompt).permit(:content)
+  end
 end
