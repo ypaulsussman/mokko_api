@@ -55,14 +55,39 @@ end
 
 NoteTag.create!(tag: tag_four, note: note_two)
 
-['What compelled you make this note?', 'What might cause you to deactivate this note?',
- 'How could this note be abstracted?', "What's always, sometimes, and never true of this note?",
- "How could this note connect with another work you've consumed?",
- 'How could this note connect with an experience in your life?',
- 'Who might benefit from you sharing this note with? Who might benefit you?',
- 'Where could you apply this note in your current projects?',
- 'What are the constituent components of this note?', 'What does this note suggest?',
- 'What are some examples of this note?', 'What are the important sub-components of this note?',
- 'Is this note a part of some broader category?', 'Why does this note matter?'].each do |prompt|
-   Prompt.create!(content: prompt)
- end
+# ['What compelled you make this note?',
+#  'What might cause you to deactivate this note?',
+#  'How could this note be abstracted?',
+#  "What's always, sometimes, and never true of this note?",
+#  "How could this note connect with another work you've consumed?",
+#  'How could this note connect with an experience in your life?',
+#  'Who might benefit from you sharing this note with? Who might benefit you?',
+#  'Where could you apply this note in your current projects?',
+#  'What are the constituent components of this note?',
+#  'What does this note suggest?',
+#  'What are some examples of this note?',
+#  'What are the important sub-components of this note?',
+#  'Is this note a part of some broader category?',
+#  'Why does this note matter?',
+#  'What are the possible design flaws in this note?',
+#  'How might you change the theme of this note?',
+#  'What underlying bias might there be in this note?',
+#  'What inference might this note support?',
+#  'What is the chain of reasoning in this note?',
+#  'What changes would you make to solve/address the problems/issues raised by this note?',
+#  'How would you improve upon or extend this note?',
+#  'Can you propose an alternative solution to this note?',
+#  'What could be done to minimize (maximize) this note?',
+#  'How would you prioritize criteria within this note, and why?',
+#  'Can you formulate and test a conjecture from this note?',
+#  "Can you predict the potential benefits and drawbacks of this note's outcomes?",
+#  'Can you construct a model that would change this note?',
+#  'Can you think of an original way to apply this note?',
+#  'How would you qualify this note? Disprove this note?',
+#  'What is an example of this note?',
+#  'How would you use this note in your daily life?',
+#  'How is this note alike/different to another recent one?',
+#  'What is the cause of this note?',
+#  'What evidence supports this note?'].each do |prompt|
+#   Prompt.create!(content: prompt)
+# end
