@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_22_163819) do
+ActiveRecord::Schema.define(version: 2021_05_03_022625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,22 +26,11 @@ ActiveRecord::Schema.define(version: 2021_04_22_163819) do
 
   create_table "interrogations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "note_id", null: false
-    t.uuid "prompt_id"
     t.string "content"
     t.date "occurred_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["note_id"], name: "index_interrogations_on_note_id"
-    t.index ["prompt_id"], name: "index_interrogations_on_prompt_id"
-  end
-
-  create_table "note_prompts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "prompt_id", null: false
-    t.uuid "note_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["note_id"], name: "index_note_prompts_on_note_id"
-    t.index ["prompt_id"], name: "index_note_prompts_on_prompt_id"
   end
 
   create_table "note_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -64,12 +53,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_163819) do
     t.index ["deck_id"], name: "index_notes_on_deck_id"
   end
 
-  create_table "prompts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
@@ -86,9 +69,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_163819) do
 
   add_foreign_key "decks", "users"
   add_foreign_key "interrogations", "notes"
-  add_foreign_key "interrogations", "prompts"
-  add_foreign_key "note_prompts", "notes"
-  add_foreign_key "note_prompts", "prompts"
   add_foreign_key "note_tags", "notes"
   add_foreign_key "note_tags", "tags"
   add_foreign_key "notes", "decks"

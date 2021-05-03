@@ -2,12 +2,10 @@
 
 one:
   note: one
-  prompt: one
   content: MyString
   occurred_on: 2021-04-21
 
 two:
   note: two
-  prompt: two
   content: MyString
   occurred_on: 2021-04-21

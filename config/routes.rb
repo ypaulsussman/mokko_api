@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
     resources :interrogations
     resources :tags
-    resources :prompts
     resources :notes
     resources :decks
     # resources :users

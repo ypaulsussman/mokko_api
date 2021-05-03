@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class InterrogationsControllerTest < ActionDispatch::IntegrationTest
@@ -13,13 +15,13 @@ class InterrogationsControllerTest < ActionDispatch::IntegrationTest
   test 'should create interrogation' do
     assert_difference('Interrogation.count') do
       post interrogations_url,
-           params: { interrogation: { content: @interrogation.content, note_id: @interrogation.note_id, occurred_on: @interrogation.occurred_on, prompt_id: @interrogation.prompt_id } }, as: :json
+           params: { interrogation: { content: @interrogation.content,
+                                      note_id: @interrogation.note_id,
+                                      occurred_on: @interrogation.occurred_on } }, as: :json
     end
 
     assert_response 201
-  end# frozen_string_literal: true
-
-
+  end
 
   test 'should show interrogation' do
     get interrogation_url(@interrogation), as: :json
@@ -28,7 +30,9 @@ class InterrogationsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update interrogation' do
     patch interrogation_url(@interrogation),
-          params: { interrogation: { content: @interrogation.content, note_id: @interrogation.note_id, occurred_on: @interrogation.occurred_on, prompt_id: @interrogation.prompt_id } }, as: :json
+          params: { interrogation: { content: @interrogation.content,
+                                     note_id: @interrogation.note_id,
+                                     occurred_on: @interrogation.occurred_on } }, as: :json
     assert_response 200
   end
 

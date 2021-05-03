@@ -47,6 +47,6 @@ class InterrogationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def interrogation_params
-    params.require(:interrogation).permit(:note_id, :prompt_id, :content, :occurred_on)
+    params.require(:interrogation).permit(:note_id, :content, :occurred_on)
   end
 end
