@@ -11,7 +11,7 @@ class Note < ApplicationRecord
                          where({
                                  deck_id: [decks],
                                  next_occurrence: Date.today..(Date.today + 7.days)
-                               }).select(:next_occurrence)
+                               }).select(:id, :next_occurrence)
                        }
 
   # BASE_INTERVALS = [1, 2, 3, 5, 8, 13, 21].freeze
