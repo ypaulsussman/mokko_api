@@ -7,6 +7,12 @@ class Note < ApplicationRecord
   has_many :tags, through: :note_tags
 
   validates :content, presence: true
+  scope :upcoming_for, lambda { |decks|
+                         where({
+                                 deck_id: [decks],
+                                 next_occurrence: Date.today..(Date.today + 7.days)
+                               }).select(:next_occurrence)
+                       }
 
-  BASE_INTERVALS = [1, 2, 3, 5, 8, 13, 21].freeze
+  # BASE_INTERVALS = [1, 2, 3, 5, 8, 13, 21].freeze
 end

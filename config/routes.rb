@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
     resources :interrogations
     resources :tags
-    resources :notes
+    resources :notes do
+      get 'overview', on: :collection
+    end
     resources :decks
     # resources :users
   end
