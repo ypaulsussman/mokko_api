@@ -133,6 +133,109 @@ p2020_meetup_note_three = Note.create!(
   content: "- Do your project/product for fun, then when it becomes overwhelming set up a company.\n  - 'Place small bets' \n    - first on your own, in your class; then \n    - Using gSites for a few friends; then \n    - trial with [4.0 Schools](https://4pt0.org/)\n    - Each time, test a progressively more important hypothesis\n  - Remember, a startup is inherently temporary\n    - It's a search for a model, not an institution.\n    - Steve Blank: '_a startup is just a discovery process for a business: once you have a sustainable, scalable model? Then it's a business._'"
 )
 
+# fourth deck
+
+educause_deck = Deck.create!(title: "Educause's 7 Things You Should Know", user: demo_user)
+
+educause_note_one = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 5,
+  current_interval: 1,
+  deck: educause_deck,
+  content: "- Adaptive Learning: several variants, along gradient of “time cost to develop” vs “later flexibility”:\n  - ‘Closed’ system: premade adaptive logic and course content;\n  - ‘Open’ system: requires user to configure course content and adaptive logic;\n  - ‘Hybrid’ system: provides logic; user adds content (currently fastest-growing)"
+)
+
+educause_note_two = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 10,
+  current_interval: 3,
+  deck: educause_deck,
+  content: "- Adaptive Learning: eliminates need to ‘teach to the middle’ in larger courses\n  - Works better with factual, procedural knowledge than with higher-order/strategic knowledge \n  - As such, more appropriate to entry-level courses"
+)
+
+educause_note_three = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 9,
+  current_interval: 5,
+  deck: educause_deck,
+  content: "- Intelligent Tutoring Systems: differ from other computer-training systems in two ways\n  - Can interpret complex student responses\n    - Not merely from worked examples, but\n    - Also from the details of requests (for assistance)\n  - Can learn as they operate\n    - First, build a profile for each student (from that student’s work and requests), then \n    - Estimate each student's level of mastery (in order to select future assignments)"
+)
+
+educause_note_four = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 3,
+  current_interval: 8,
+  deck: educause_deck,
+  content: "- One early discovery in research on Intelligent Tutoring Systems: struggling students should explain what they *do* understand to the tutor\n  - The tutor then can provide just enough hints for the student to work out the solution on their own \n  - Better than the traditional model (i.e. the tutor reexplaining the process via a different analogy, medium, level of detail, etc.)"
+)
+
+educause_note_five = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 11,
+  current_interval: 8,
+  deck: educause_deck,
+  content: "- Intelligent Tutoring Systems often currently interact with complex student behavior ('more than just the answer') by \n  - breaking complex tasks down into sequences (or trees) of process-based steps, each of which\n  - requires the student to provide some form of “work” (e.g. a diagram/equation/summary/etc.)"
+)
+
+# fifth deck
+
+meditation_deck = Deck.create!(title: 'Practicing Mindfulness (Great Courses)', user: demo_user)
+
+meditation_note_one = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 4,
+  current_interval: 1,
+  deck: meditation_deck,
+  content: "- _Bhavana_, or 'cultivation,' is closer to mindfulness practice than the term 'meditation' (it's not about ruminating deeply)"
+)
+
+meditation_note_two = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 6,
+  current_interval: 2,
+  deck: meditation_deck,
+  content: "- Mindfulness: \n  - A moment-by-moment awareness\n  - The process of attentively observing your experience as it unfolds, without judgment or comparisons\n  - The recognition of each thought as a momentary event that passes through the mind"
+)
+
+meditation_note_three = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 5,
+  current_interval: 3,
+  deck: meditation_deck,
+  content: "- _ekgrata,_ or 'one-pointedness' \n  - The ultimate/eventual goal of mindfulness: learning to concentrate\n  - First step is mere awareness of when one fails to concentrate\n  - Possible be distracted by thoughts, or by sensations\n		- For the former, simply observe 'thinking'; the latter, 'feeling.'\n		- After, return attention to movement/cycle of the breath"
+)
+
+meditation_note_four = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 10,
+  current_interval: 3,
+  deck: meditation_deck,
+  content: "- The mindfulness tradition holds that boredom is not caused by our circumstances\n	- Rather, it's the product of inattention\n	- That is, it's the result of withdrawing our full attention from what's happening at the moment"
+)
+
+meditation_note_five = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 9,
+  current_interval: 5,
+  deck: meditation_deck,
+  content: "- The belief that 'pain shouldn't happen to us' is a common cause of suffering\n  - This is literally delusional: it's inconsistent with the nature of the world\n	- When you experience pain (during e.g. meditation): \n		- First, simply attempt to deliberately, mindfully eliminate it (looser clothes, different cushion)\n		- Second, simply observe: draw your attention to the pain, and investigate it\n		- Become a bystander; notice its qualities, and impermanence"
+)
+
+meditation_note_six = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 8,
+  current_interval: 5,
+  deck: meditation_deck,
+  content: "- When you notice yourself thinking, consider whether it's:\n  - rooted in selfishness/desires,\n  - rooted in hatred/aversion, and/or\n  - rooted in unrealistic beliefs about the world."
+)
+
+meditation_note_seven = Note.create!(
+  active: true,
+  next_occurrence: Date.today + 1,
+  current_interval: 8,
+  deck: meditation_deck,
+  content: "- To disarm a harmful thought:\n  - Replacement (with a helpful corrolary thought) \n    - For desire, thoughts of the object-of-desire's impermanence; \n    - For animosity, thoughts of compassion for the object-of-dislike; \n    - For delusion, thoughts based in reality.\n  - Reflecting on Results (contemplate the consequences of the harmful thought: even if it's simply 'being a person whose mind frequently harbors and conjures such thoughts')\n  - Reconstructing (examine the antecedents of the thought)\n  - Redirecting (acknowledging that thoughts, like all else, pass away: then returning focus to e.g. the breath, or the elements of the body)"
+)
 # tags
 
 tag_one = Tag.create!(content: '"What I Worked On"')
@@ -145,11 +248,16 @@ tag_seven = Tag.create!(content: 'memory')
 tag_eight = Tag.create!(content: 'problem-solving')
 tag_nine = Tag.create!(content: 'product')
 tag_ten = Tag.create!(content: 'from a lecture')
+tag_eleven = Tag.create!(content: 'pedagogy')
+tag_twelve = Tag.create!(content: 'meditation')
 
 [pg_note_one, pg_note_two, pg_note_three].each do |note|
-  [tag_one, tag_two].each do |tag|
-    NoteTag.create!(tag: tag, note: note)
-  end
+  NoteTag.create!(tag: tag_one, note: note)
+end
+
+[pg_note_one, pg_note_two, pg_note_three, educause_note_one, educause_note_two,
+ educause_note_three, educause_note_four, educause_note_five].each do |note|
+  NoteTag.create!(tag: tag_two, note: note)
 end
 
 [pg_note_one, pg_note_three].each do |note|
@@ -172,12 +280,25 @@ NoteTag.create!(tag: tag_seven, note: ccss_note_five)
   NoteTag.create!(tag: tag_eight, note: note)
 end
 
-[p2020_meetup_note_one, p2020_meetup_note_two, p2020_meetup_note_three].each do |note|
+[p2020_meetup_note_one, p2020_meetup_note_two, p2020_meetup_note_three, educause_note_one,
+ educause_note_two, educause_note_three, educause_note_four, educause_note_five].each do |note|
   NoteTag.create!(tag: tag_nine, note: note)
 end
 
 [ccss_note_one, ccss_note_two, ccss_note_three, ccss_note_four, ccss_note_five, ccss_note_six,
  ccss_note_seven, ccss_note_eight, p2020_meetup_note_one, p2020_meetup_note_two,
- p2020_meetup_note_three].each do |note|
+ p2020_meetup_note_three, meditation_note_one, meditation_note_two, meditation_note_three,
+ meditation_note_four, meditation_note_five, meditation_note_six,
+ meditation_note_seven].each do |note|
   NoteTag.create!(tag: tag_ten, note: note)
+end
+
+[educause_note_one, educause_note_two, educause_note_three, educause_note_four,
+ educause_note_five].each do |note|
+  NoteTag.create!(tag: tag_eleven, note: note)
+end
+
+[meditation_note_one, meditation_note_two, meditation_note_three, meditation_note_four,
+ meditation_note_five, meditation_note_six, meditation_note_seven].each do |note|
+  NoteTag.create!(tag: tag_twelve, note: note)
 end
