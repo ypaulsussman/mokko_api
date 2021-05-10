@@ -5,13 +5,14 @@ Rails.application.routes.draw do
     root to: 'application#lander'
     post 'login', to: 'tokens#create'
 
-    resources :interrogations
+    resources :prompts
+    resources :decks
     resources :tags
     resources :notes do
       get 'overview', on: :collection
       post 'review', on: :collection
     end
-    resources :decks
+    resources :interrogations
     # resources :users
   end
 end

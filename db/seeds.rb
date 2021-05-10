@@ -9,11 +9,20 @@
 
 demo_user = User.create!(name: 'young suss', email: 'ysuss@example.com', password: 'foobar')
 
+prompt_one = Prompt.create!(content: "What's an exception to this?")
+prompt_two = Prompt.create!(content: 'Where could you apply this today?')
+prompt_three = Prompt.create!(content: 'How could you apply this to an unrelated discipline?')
+prompt_four = Prompt.create!(content: 'Why do you think you initially excerpted this into a note?')
+prompt_five = Prompt.create!(content: 'What would happen if the inverse were true?')
+
+all_prompts = [prompt_one.id, prompt_two.id, prompt_three.id, prompt_four.id, prompt_five.id]
+puts('all_prompts: ', all_prompts)
 # first deck
 
 pg_deck = Deck.create!(title: 'Paul Graham Essays', user: demo_user)
 
 pg_note_one = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 1,
@@ -22,6 +31,7 @@ pg_note_one = Note.create!(
 )
 
 pg_note_two = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 3,
@@ -30,6 +40,7 @@ pg_note_two = Note.create!(
 )
 
 pg_note_three = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 5,
@@ -42,6 +53,7 @@ pg_note_three = Note.create!(
 ccss_deck = Deck.create!(title: 'Crash Course Study Skills', user: demo_user)
 
 ccss_note_one = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 1,
@@ -50,6 +62,7 @@ ccss_note_one = Note.create!(
 )
 
 ccss_note_two = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 1,
   current_interval: 1,
@@ -58,6 +71,7 @@ ccss_note_two = Note.create!(
 )
 
 ccss_note_three = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 2,
@@ -66,6 +80,7 @@ ccss_note_three = Note.create!(
 )
 
 ccss_note_four = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 2,
   current_interval: 2,
@@ -74,6 +89,7 @@ ccss_note_four = Note.create!(
 )
 
 ccss_note_five = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 3,
@@ -82,6 +98,7 @@ ccss_note_five = Note.create!(
 )
 
 ccss_note_six = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 3,
   current_interval: 3,
@@ -90,6 +107,7 @@ ccss_note_six = Note.create!(
 )
 
 ccss_note_seven = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 1,
   current_interval: 5,
@@ -98,6 +116,7 @@ ccss_note_seven = Note.create!(
 )
 
 ccss_note_eight = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 5,
@@ -110,6 +129,7 @@ ccss_note_eight = Note.create!(
 p2020_meetup_deck = Deck.create!(title: 'Paul Graham Essays', user: demo_user)
 
 p2020_meetup_note_one = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 4,
   current_interval: 1,
@@ -118,6 +138,7 @@ p2020_meetup_note_one = Note.create!(
 )
 
 p2020_meetup_note_two = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today,
   current_interval: 8,
@@ -126,6 +147,7 @@ p2020_meetup_note_two = Note.create!(
 )
 
 p2020_meetup_note_three = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 1,
   current_interval: 3,
@@ -138,6 +160,7 @@ p2020_meetup_note_three = Note.create!(
 educause_deck = Deck.create!(title: "Educause's 7 Things You Should Know", user: demo_user)
 
 educause_note_one = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 5,
   current_interval: 1,
@@ -146,6 +169,7 @@ educause_note_one = Note.create!(
 )
 
 educause_note_two = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 10,
   current_interval: 3,
@@ -154,6 +178,7 @@ educause_note_two = Note.create!(
 )
 
 educause_note_three = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 9,
   current_interval: 5,
@@ -162,6 +187,7 @@ educause_note_three = Note.create!(
 )
 
 educause_note_four = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 3,
   current_interval: 8,
@@ -170,6 +196,7 @@ educause_note_four = Note.create!(
 )
 
 educause_note_five = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 11,
   current_interval: 8,
@@ -182,6 +209,7 @@ educause_note_five = Note.create!(
 meditation_deck = Deck.create!(title: 'Practicing Mindfulness (Great Courses)', user: demo_user)
 
 meditation_note_one = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 4,
   current_interval: 1,
@@ -190,6 +218,7 @@ meditation_note_one = Note.create!(
 )
 
 meditation_note_two = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 6,
   current_interval: 2,
@@ -198,6 +227,7 @@ meditation_note_two = Note.create!(
 )
 
 meditation_note_three = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 5,
   current_interval: 3,
@@ -206,6 +236,7 @@ meditation_note_three = Note.create!(
 )
 
 meditation_note_four = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 10,
   current_interval: 3,
@@ -214,6 +245,7 @@ meditation_note_four = Note.create!(
 )
 
 meditation_note_five = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 9,
   current_interval: 5,
@@ -222,6 +254,7 @@ meditation_note_five = Note.create!(
 )
 
 meditation_note_six = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 8,
   current_interval: 5,
@@ -230,6 +263,7 @@ meditation_note_six = Note.create!(
 )
 
 meditation_note_seven = Note.create!(
+  prompts_remaining: all_prompts.shuffle,
   active: true,
   next_occurrence: Date.today + 1,
   current_interval: 8,
