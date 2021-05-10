@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :tags
     resources :notes do
       get 'overview', on: :collection
+      post 'review', on: :collection
     end
     resources :decks
     # resources :users
