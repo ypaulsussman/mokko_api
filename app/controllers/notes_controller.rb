@@ -34,7 +34,31 @@ class NotesController < ApplicationController
 
   # POST /notes/review
   def review
-    puts('note_params: ', params[:today], params[:tomorrow], params[:restOfWeek])
+    # @TODO:
+    # 1. grab all note id's from users' decks
+    # 2. loop through all id's sent from client
+    # 3. if any id's sent from client don't match, return `403`
+
+    base_notes = Note.where({ id: params[:today] }).includes(:deck, :tags)
+    send_prompts = false
+    notes_with_cues = base_notes.map do |note|
+      if note.prompts_remaining.first.nil?
+        # @TODO: ensure repeat cards aren't chosen (set that on submit of new
+        # interrogation, though, not here. And how to keep it - join table?)
+        note.cue_note = Note.where.not({ id: params[:today] }).includes(:deck,
+                                                                        :tags)
+      else
+        send_prompts = true
+      end
+      note
+    end
+
+    render json: if send_prompts
+                   { notes: notes_with_cues,
+                     prompts: Prompt.all }
+                 else
+                   { notes: notes_with_cues }
+                 end
   end
 
   # PATCH/PUT /notes/1

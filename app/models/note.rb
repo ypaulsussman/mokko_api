@@ -6,6 +6,8 @@ class Note < ApplicationRecord
   has_many :note_tags
   has_many :tags, through: :note_tags
 
+  attr_accessor :cue_note
+
   validates :content, presence: true
   scope :upcoming_for, lambda { |decks|
                          where({
