@@ -43,10 +43,11 @@ class NotesController < ApplicationController
     send_prompts = false
     notes_with_cues = base_notes.map do |note|
       if note.prompts_remaining.first.nil?
-        # @TODO: ensure repeat cards aren't chosen (set that on submit of new
-        # interrogation, though, not here. And how to keep it - join table?)
-        note.cue_note = Note.where.not({ id: params[:today] }).includes(:deck,
-                                                                        :tags)
+        note.cue_note =
+          Note
+          .where.not({ id: params[:today] + note.previous_cue_notes })
+          .includes(:deck, :tags)
+          .first
       else
         send_prompts = true
       end

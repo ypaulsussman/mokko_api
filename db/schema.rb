@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_001434) do
+ActiveRecord::Schema.define(version: 2021_05_28_040528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_001434) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "prompts_remaining", array: true
     t.boolean "initialized", default: false
+    t.uuid "previous_cue_notes", array: true
     t.index ["deck_id"], name: "index_notes_on_deck_id"
   end
 
