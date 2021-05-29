@@ -15,13 +15,15 @@ class InterrogationsController < ApplicationController
 
   # POST /interrogations
   def create
-    @interrogation = Interrogation.new(interrogation_params)
+    puts('params: ', params)
+    render json: params
 
-    if @interrogation.save
-      render json: @interrogation, status: :created, location: @interrogation
-    else
-      render json: @interrogation.errors, status: :unprocessable_entity
-    end
+    # @interrogation = Interrogation.new(interrogation_params)
+    # if @interrogation.save
+    #   render json: @interrogation, status: :created, location: @interrogation
+    # else
+    #   render json: @interrogation.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /interrogations/1
