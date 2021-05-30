@@ -15,8 +15,15 @@ class InterrogationsController < ApplicationController
 
   # POST /interrogations
   def create
-    puts('params: ', params)
-    render json: params
+    ActiveRecord::Base.transaction do
+      puts('params: ', params)
+      # create new interrogation
+      # @TODO: how to determine whether cue id is from note or prompt? 
+      # and: do this on client, not server?
+      # if present, remove prompt uuid from note's remaining_prompts
+      # update note's "next_occurrence" based on interval
+      render json: params
+    end
 
     # @interrogation = Interrogation.new(interrogation_params)
     # if @interrogation.save
