@@ -16,21 +16,27 @@ class InterrogationsController < ApplicationController
   # POST /interrogations
   def create
     ActiveRecord::Base.transaction do
-      puts('params: ', params)
-      # create new interrogation
-      # @TODO: how to determine whether cue id is from note or prompt? 
-      # and: do this on client, not server?
-      # if present, remove prompt uuid from note's remaining_prompts
-      # update note's "next_occurrence" based on interval
-      render json: params
-    end
+      @interrogation = Interrogation.new
+      @interrogation.note_id = params[:noteId]
+      @interrogation.cue_id = params[:cueId]
+      @interrogation.cue_from_prompt = params[:cueIsPrompt]
+      @interrogation.content = params[:mokkoValue]
+      @interrogation.save!
 
-    # @interrogation = Interrogation.new(interrogation_params)
-    # if @interrogation.save
-    #   render json: @interrogation, status: :created, location: @interrogation
-    # else
-    #   render json: @interrogation.errors, status: :unprocessable_entity
-    # end
+      interval = params[:mokkoInterval].to_i
+
+      @note = Note.find_by(id: params[:noteId])
+      @note.current_interval = interval
+      @note.next_occurrence = Date.today + interval.days
+      @note.initialized = true unless @note.initialized
+      if params[:cueIsPrompt]
+        @note.prompts_remaining = @note.prompts_remaining.reject { |id| id == params[:cueId] }
+      end
+      @note.save!
+    end
+    render json: { note: params[:noteId] }, status: :created
+  rescue StandardError => e
+    render json: { errors: e }, status: :unprocessable_entity
   end
 
   # PATCH/PUT /interrogations/1
@@ -56,6 +62,7 @@ class InterrogationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def interrogation_params
-    params.require(:interrogation).permit(:note_id, :content, :occurred_on)
+    params.permit(:noteId, :cueId, :cueIsPrompt, :mokkoValue, :mokkoInterval, :content,
+                  :occurred_on)
   end
 end
