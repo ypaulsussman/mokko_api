@@ -55,10 +55,10 @@ class NotesController < ApplicationController
     end
 
     render json: if send_prompts
-                   { notes: notes_with_cues,
+                   { notes: notes_with_cues.as_json(include: [:deck, :tags]),
                      prompts: Prompt.all }
                  else
-                   { notes: notes_with_cues }
+                   { notes: notes_with_cues.as_json(include: [:deck, :tags]) }
                  end
   end
 

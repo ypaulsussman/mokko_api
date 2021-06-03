@@ -93,7 +93,7 @@ ccss_note_eight = Note.create!(
 
 # third deck
 
-p2020_meetup_deck = Deck.create!(title: 'Paul Graham Essays', user: demo_user)
+p2020_meetup_deck = Deck.create!(title: 'EdTech Meetups', user: demo_user)
 
 p2020_meetup_note_one = Note.create!(
   prompts_remaining: all_prompts.shuffle,

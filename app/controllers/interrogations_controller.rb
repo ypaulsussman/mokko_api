@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InterrogationsController < ApplicationController
   before_action :set_interrogation, only: [:show, :update, :destroy]
 
