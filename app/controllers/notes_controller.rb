@@ -30,12 +30,11 @@ class NotesController < ApplicationController
   # POST /notes/review
   def review
     user_decks = Deck.where(user_id: @current_user)
-    base_notes = Note.upcoming_for(user_decks).includes(:deck, :tags)
+    base_notes = Note.upcoming_for(user_decks)
 
     if base_notes.length < MAX_SESSION_NOTES
       total_needed = MAX_SESSION_NOTES - base_notes.length
       base_notes += Note.uninitialized_for(user_decks, total_needed)
-                        .includes(:deck, :tags)
     end
 
     send_prompts = false

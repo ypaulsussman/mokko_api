@@ -12,13 +12,13 @@ class Note < ApplicationRecord
   scope :upcoming_for, lambda { |decks|
                          where({
                                  deck_id: [decks],
-                                 next_occurrence: Date.today..(Date.today + 7.days)
-                               })
+                                 next_occurrence: Date.today
+                               }).includes(:deck, :tags)
                        }
   scope :uninitialized_for, lambda { |decks, total_needed|
                               where({
                                       deck_id: [decks],
                                       initialized: false
-                                    }).limit(total_needed)
+                                    }).limit(total_needed).includes(:deck, :tags)
                             }
 end
