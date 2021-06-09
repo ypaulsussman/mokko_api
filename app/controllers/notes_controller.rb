@@ -2,6 +2,7 @@
 
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :update, :destroy]
+  MAX_SESSION_NOTES = 4
 
   # GET /notes
   def index
@@ -13,12 +14,6 @@ class NotesController < ApplicationController
   # GET /notes/1
   def show
     render json: @note
-  end
-
-  # GET /notes/overview
-  def overview
-    upcoming_notes = Note.upcoming_for(Deck.where(user_id: @current_user))
-    render json: upcoming_notes
   end
 
   # POST /notes
@@ -34,12 +29,15 @@ class NotesController < ApplicationController
 
   # POST /notes/review
   def review
-    # @TODO:
-    # 1. grab all note id's from users' decks
-    # 2. loop through all id's sent from client
-    # 3. if any id's sent from client don't match, return `403`
+    user_decks = Deck.where(user_id: @current_user)
+    base_notes = Note.upcoming_for(user_decks).includes(:deck, :tags)
 
-    base_notes = Note.where({ id: params[:today] }).includes(:deck, :tags)
+    if base_notes.length < MAX_SESSION_NOTES
+      total_needed = MAX_SESSION_NOTES - base_notes.length
+      base_notes += Note.uninitialized_for(user_decks, total_needed)
+                        .includes(:deck, :tags)
+    end
+
     send_prompts = false
     notes_with_cues = base_notes.map do |note|
       if note.prompts_remaining.first.nil?

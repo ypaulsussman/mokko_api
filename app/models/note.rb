@@ -13,9 +13,12 @@ class Note < ApplicationRecord
                          where({
                                  deck_id: [decks],
                                  next_occurrence: Date.today..(Date.today + 7.days)
-                               }).or(Note.where({
-                                                  deck_id: [decks],
-                                                  initialized: false
-                                                })).select(:id, :next_occurrence)
+                               })
                        }
+  scope :uninitialized_for, lambda { |decks, total_needed|
+                              where({
+                                      deck_id: [decks],
+                                      initialized: false
+                                    }).limit(total_needed)
+                            }
 end
