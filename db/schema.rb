@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_30_004818) do
+ActiveRecord::Schema.define(version: 2021_06_09_192849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 2021_05_30_004818) do
     t.boolean "cue_from_prompt"
     t.index ["cue_id"], name: "index_interrogations_on_cue_id"
     t.index ["note_id"], name: "index_interrogations_on_note_id"
+  end
+
+  create_table "mokkos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "content"
+    t.boolean "cue_from_prompt"
+    t.uuid "note_id", null: false
+    t.uuid "cue_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cue_id"], name: "index_mokkos_on_cue_id"
+    t.index ["note_id"], name: "index_mokkos_on_note_id"
   end
 
   create_table "note_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -80,6 +91,7 @@ ActiveRecord::Schema.define(version: 2021_05_30_004818) do
 
   add_foreign_key "decks", "users"
   add_foreign_key "interrogations", "notes"
+  add_foreign_key "mokkos", "notes"
   add_foreign_key "note_tags", "notes"
   add_foreign_key "note_tags", "tags"
   add_foreign_key "notes", "decks"

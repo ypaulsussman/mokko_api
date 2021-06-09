@@ -1,0 +1,2 @@
+class Mokko < ApplicationRecord
+end
