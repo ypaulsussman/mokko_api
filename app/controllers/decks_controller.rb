@@ -5,9 +5,9 @@ class DecksController < ApplicationController
 
   # GET /decks
   def index
-    @decks = @current_user.decks
+    @decks = @current_user.decks.includes(:notes)
 
-    render json: @decks
+    render json: @decks.as_json(include: :notes)
   end
 
   # GET /decks/1
