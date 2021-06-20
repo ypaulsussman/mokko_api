@@ -2,7 +2,7 @@
 
 class Note < ApplicationRecord
   belongs_to :deck
-  has_many :interrogations
+  has_many :mokkos
   has_many :note_tags
   has_many :tags, through: :note_tags
 
