@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class DecksController < ApplicationController
-  before_action :set_deck, only: [:show, :update, :destroy]
-
   # GET /decks
   def index
     @decks = @current_user.decks.includes(:notes)
@@ -37,18 +35,15 @@ class DecksController < ApplicationController
 
   # DELETE /decks/1
   def destroy
-    @deck.destroy
+    deck = @current_user.decks.find(params[:id])
+    deck.destroy
+    render json: { destroyed_deck: deck.title }
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_deck
-    @deck = Deck.find(params[:id])
-  end
-
   # Only allow a list of trusted parameters through.
   def deck_params
-    params.require(:deck).permit(:title, :user_id)
+    params.require(:deck).permit(:title, :user_id, :id)
   end
 end

@@ -46,15 +46,15 @@ ActiveRecord::Schema.define(version: 2021_06_20_175859) do
 
   create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "deck_id", null: false
+    t.text "content"
     t.boolean "active", default: true
+    t.boolean "initialized", default: false
     t.date "next_occurrence"
     t.integer "current_interval", default: 1
-    t.text "content"
+    t.uuid "prompts_remaining", array: true
+    t.uuid "previous_cue_notes", array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "prompts_remaining", array: true
-    t.boolean "initialized", default: false
-    t.uuid "previous_cue_notes", array: true
     t.index ["deck_id"], name: "index_notes_on_deck_id"
   end
 

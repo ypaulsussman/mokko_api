@@ -2,8 +2,8 @@
 
 class Note < ApplicationRecord
   belongs_to :deck
-  has_many :mokkos
-  has_many :note_tags
+  has_many :mokkos, dependent: :destroy
+  has_many :note_tags, dependent: :destroy
   has_many :tags, through: :note_tags
 
   attr_accessor :cue_note
