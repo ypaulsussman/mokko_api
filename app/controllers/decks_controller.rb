@@ -25,7 +25,6 @@ class DecksController < ApplicationController
 
   # PATCH/PUT /decks/1
   def update
-    puts('preeeSENT!', params[:id], params[:title])
     @deck = @current_user.decks.find(params[:id])
 
     if @deck.update(title: params[:title])
