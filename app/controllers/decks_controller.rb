@@ -8,20 +8,15 @@ class DecksController < ApplicationController
     render json: @decks.as_json(include: :notes)
   end
 
-  # GET /decks/1
-  # def show
-  #   render json: @deck
-  # end
-
   # POST /decks
-  # def create
-  #   @deck = Deck.new(deck_params)
-  #   if @deck.save
-  #     render json: @deck, status: :created, location: @deck
-  #   else
-  #     render json: @deck.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def create
+    @deck = Deck.new(title: params[:title], user: @current_user)
+    if @deck.save
+      render json: @deck, status: :created
+    else
+      render json: @deck.errors, status: :unprocessable_entity
+    end
+  end
 
   # PATCH/PUT /decks/1
   def update
@@ -40,10 +35,4 @@ class DecksController < ApplicationController
     @deck.destroy
     render json: { destroyed_deck: @deck.title }
   end
-
-  # private
-  # Only allow a list of trusted parameters through.
-  # def deck_params
-  #   params.require(:deck).permit(:title, :user_id, :id)
-  # end
 end
