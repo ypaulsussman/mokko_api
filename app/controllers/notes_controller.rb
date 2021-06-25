@@ -4,18 +4,6 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :update, :destroy]
   MAX_SESSION_NOTES = 4
 
-  # GET /notes
-  def index
-    @notes = Note.all
-
-    render json: @notes
-  end
-
-  # GET /notes/1
-  def show
-    render json: @note
-  end
-
   # POST /notes
   def create
     @note = Note.new(note_params)
@@ -27,14 +15,18 @@ class NotesController < ApplicationController
     end
   end
 
+  # DELETE /notes/1
+  def destroy
+    @note.destroy
+  end
+
   # POST /notes/review
   def review
-    user_decks = Deck.where(user_id: @current_user)
-    base_notes = Note.upcoming_for(user_decks)
+    base_notes = Note.upcoming_for(@current_user.decks)
 
     if base_notes.length < MAX_SESSION_NOTES
       total_needed = MAX_SESSION_NOTES - base_notes.length
-      base_notes += Note.uninitialized_for(user_decks, total_needed)
+      base_notes += Note.uninitialized_for(@current_user.decks, total_needed)
     end
 
     send_prompts = false
@@ -59,6 +51,11 @@ class NotesController < ApplicationController
                  end
   end
 
+  # GET /notes/1
+  def show
+    render json: @note.as_json(include: [:deck, :tags])
+  end
+
   # PATCH/PUT /notes/1
   def update
     if @note.update(note_params)
@@ -68,19 +65,13 @@ class NotesController < ApplicationController
     end
   end
 
-  # DELETE /notes/1
-  def destroy
-    @note.destroy
-  end
-
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_note
-    @note = Note.find(params[:id])
+    @note = Note.includes(:deck, :tags).find_by(id: params[:id], deck_id: @current_user.decks)
+    render(json: {}, status: :not_found) and return if @note.nil?
   end
 
-  # Only allow a list of trusted parameters through.
   def note_params
     params.require(:note).permit(:deck_id, :active, :next_occurrence, :current_interval, :content)
   end
