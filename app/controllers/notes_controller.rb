@@ -53,7 +53,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   def show
-    render json: @note.as_json(include: [:deck, :tags])
+    render json: @note.as_json(include: [:deck, :tags, :mokkos])
   end
 
   # PATCH/PUT /notes/1
@@ -68,7 +68,7 @@ class NotesController < ApplicationController
   private
 
   def set_note
-    @note = Note.includes(:deck, :tags).find_by(id: params[:id], deck_id: @current_user.decks)
+    @note = Note.includes(:deck, :tags, :mokkos).find_by(id: params[:id], deck_id: @current_user.decks)
     render(json: {}, status: :not_found) and return if @note.nil?
   end
 
