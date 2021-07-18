@@ -59,7 +59,7 @@ class NotesController < ApplicationController
   # PATCH/PUT /notes/1
   def update
     if @note.update(note_params)
-      render json: @note
+      render json: @note.as_json(include: [:deck, :tags, :mokkos])
     else
       render json: @note.errors, status: :unprocessable_entity
     end
@@ -68,7 +68,11 @@ class NotesController < ApplicationController
   private
 
   def set_note
-    @note = Note.includes(:deck, :tags, :mokkos).find_by(id: params[:id], deck_id: @current_user.decks)
+    @note =
+      Note
+      .includes(:deck, :tags, :mokkos)
+      .find_by(id: params[:id], deck_id: @current_user.decks)
+
     render(json: {}, status: :not_found) and return if @note.nil?
   end
 
