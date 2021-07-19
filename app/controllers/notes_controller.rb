@@ -53,13 +53,15 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   def show
-    render json: @note.as_json(include: [:deck, :tags, :mokkos])
+    render json: { note: @note.as_json(include: [:deck, :tags, :mokkos]),
+                   selectable_decks: @current_user.decks.select(:id, :title) }
   end
 
   # PATCH/PUT /notes/1
   def update
     if @note.update(note_params)
-      render json: @note.as_json(include: [:deck, :tags, :mokkos])
+      render json: { note: @note.as_json(include: [:deck, :tags, :mokkos]),
+                     selectable_decks: @current_user.decks.select(:id, :title) }
     else
       render json: @note.errors, status: :unprocessable_entity
     end
