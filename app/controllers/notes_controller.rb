@@ -5,19 +5,19 @@ class NotesController < ApplicationController
   MAX_SESSION_NOTES = 4
 
   # POST /notes
-  def create
-    @note = Note.new(note_params)
-
-    if @note.save
-      render json: @note, status: :created, location: @note
-    else
-      render json: @note.errors, status: :unprocessable_entity
-    end
-  end
+  # def create
+  #   @note = Note.new(note_params)
+  #   if @note.save
+  #     render json: @note, status: :created, location: @note
+  #   else
+  #     render json: @note.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /notes/1
   def destroy
     @note.destroy
+    render json: { destroyed_note: @note.id }
   end
 
   # POST /notes/review
