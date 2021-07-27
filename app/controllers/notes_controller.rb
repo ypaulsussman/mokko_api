@@ -3,6 +3,7 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :update, :destroy]
   MAX_SESSION_NOTES = 4
+  NOTES_PER_PAGE = 6
 
   # POST /notes
   # def create
@@ -18,6 +19,17 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     render json: { destroyed_note: @note.id }
+  end
+
+  # GET /notes
+  def index
+    puts 'YA OFFSETTTTT: ', params['page'], 'was there!'
+    @notes = Note
+             .where(deck_id: @current_user.decks)
+             .limit(NOTES_PER_PAGE)
+             .offset((params['page'].to_i - 1) * NOTES_PER_PAGE)
+
+    render json: @notes
   end
 
   # POST /notes/review
