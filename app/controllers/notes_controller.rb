@@ -23,13 +23,12 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    puts 'YA OFFSETTTTT: ', params['page'], 'was there!'
     @notes = Note
              .where(deck_id: @current_user.decks)
              .limit(NOTES_PER_PAGE)
              .offset((params['page'].to_i - 1) * NOTES_PER_PAGE)
 
-    render json: @notes
+    render json: { notes: @notes, note_count: Note.where(deck_id: @current_user.decks).length }
   end
 
   # POST /notes/review
