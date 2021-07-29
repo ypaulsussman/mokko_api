@@ -5,7 +5,11 @@ class TagsController < ApplicationController
 
   # GET /tags
   def index
-    @tags = Tag.all
+    @tags = Tag.where(id:
+      NoteTag.where(note_id:
+        Note.where(deck_id:
+          @current_user.decks)).select(:tag_id))
+               .select(:id, :content)
 
     render json: @tags
   end

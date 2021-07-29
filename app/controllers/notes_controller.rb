@@ -6,14 +6,33 @@ class NotesController < ApplicationController
   NOTES_PER_PAGE = 6
 
   # POST /notes
-  # def create
-  #   @note = Note.new(note_params)
-  #   if @note.save
-  #     render json: @note, status: :created, location: @note
-  #   else
-  #     render json: @note.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def create
+    ActiveRecord::Base.transaction do
+      @note = Note.create!(note_params)
+
+      if params[:tagsToAdd].length.positive?
+        params[:tagsToAdd].map do |tag|
+          if tag['id'].nil?
+            new_tag = Tag.create!(content: tag['content'])
+            NoteTag.create!(note_id: @note.id, tag_id: new_tag.id)
+          else
+            NoteTag.create!(note_id: @note.id, tag_id: tag['id'])
+          end
+        end
+      end
+    end
+
+    render json: { note: Note.find_by(id: @note).as_json(include: [:deck, :tags, :mokkos]),
+                   selectable_decks: @current_user.decks.select(:id, :title),
+                   selectable_tags:
+                    Tag.where(id:
+                      NoteTag.where(note_id:
+                        Note.where(deck_id:
+                          @current_user.decks)).select(:tag_id))
+                       .select(:id, :content) }
+  rescue StandardError => e
+    render json: { errors: e }, status: :unprocessable_entity
+  end
 
   # DELETE /notes/1
   def destroy
