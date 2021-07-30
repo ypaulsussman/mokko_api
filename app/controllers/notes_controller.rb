@@ -24,7 +24,7 @@ class NotesController < ApplicationController
 
     render json: { note: Note.find_by(id: @note).as_json(include: [:deck, :tags, :mokkos]),
                    selectable_decks: @current_user.decks.select(:id, :title),
-                   selectable_tags:
+                   tags:
                     Tag.where(id:
                       NoteTag.where(note_id:
                         Note.where(deck_id:
@@ -85,7 +85,7 @@ class NotesController < ApplicationController
   def show
     render json: { note: @note.as_json(include: [:deck, :tags, :mokkos]),
                    selectable_decks: @current_user.decks.select(:id, :title),
-                   selectable_tags:
+                   tags:
                    Tag.where(id:
                      NoteTag.where(note_id:
                        Note.where(deck_id:
@@ -119,7 +119,7 @@ class NotesController < ApplicationController
 
     render json: { note: Note.find_by(id: @note).as_json(include: [:deck, :tags, :mokkos]),
                    selectable_decks: @current_user.decks.select(:id, :title),
-                   selectable_tags:
+                   tags:
                     Tag.where(id:
                       NoteTag.where(note_id:
                         Note.where(deck_id:
