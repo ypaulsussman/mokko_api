@@ -59,26 +59,21 @@ class NotesController < ApplicationController
       base_notes += Note.uninitialized_for(@current_user.decks, total_needed)
     end
 
-    send_prompts = false
     notes_with_cues = base_notes.map do |note|
-      if note.prompts_remaining.first.nil?
-        note.cue_note =
-          Note
-          .where.not({ id: params[:today] + note.previous_cue_notes })
-          .includes(:deck, :tags)
-          .first
-      else
-        send_prompts = true
-      end
+      # @TODO: revert this change post-MVP, when you'd like to experiment more
+      # with non-note content as the "cue" for mokko-generation
+      # if note.prompts_remaining.first.nil?
+      note.cue_note =
+        Note
+        .where.not({ id: note.previous_cue_notes })
+        .includes(:deck, :tags)
+        .first
+      # end
       note
     end
 
-    render json: if send_prompts
-                   { notes: notes_with_cues.as_json(include: [:deck, :tags]),
-                     prompts: Prompt.all }
-                 else
-                   { notes: notes_with_cues.as_json(include: [:deck, :tags]) }
-                 end
+    render json: { notes: notes_with_cues.as_json(include: [:deck, :tags, :cue_note]),
+                   prompts: Prompt.all }
   end
 
   # GET /notes/1
