@@ -66,6 +66,7 @@ class NotesController < ApplicationController
       note.cue_note =
         Note
         .where.not({ id: note.previous_cue_notes })
+        .order(Arel.sql('RANDOM()'))
         .includes(:deck, :tags)
         .first
       # end
