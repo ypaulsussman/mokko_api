@@ -64,11 +64,11 @@ class NotesController < ApplicationController
       # with non-note content as the "cue" for mokko-generation
       # if note.prompts_remaining.first.nil?
       note.cue_note =
-        Note
-        .where.not({ id: note.previous_cue_notes })
-        .order(Arel.sql('RANDOM()'))
-        .includes(:deck, :tags)
-        .first
+        Note.includes(
+          :deck, :tags
+        ).find(
+          Note.where.not({ id: note.previous_cue_notes }).pluck(:id).sample
+        )
       # end
       note
     end
