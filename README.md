@@ -31,7 +31,7 @@ And this repo is the backend for that app!
 
 Let me begin not with an excuse, or apology, but defiant explanation: I had a vision of a tool, and _I. Wanted. It. Now._ The two frameworks I've worked with the most are React and Rails, and so that's what I decided to use for getting a working prototype out the door.
 
-I adapted the JWT from [this tutorial](https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api); I felt like `devise` was overkill for this project and liked that unnecessarily incorporate that gem.
+I adapted the JWT from [this tutorial](https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api); I felt like `devise` was overkill for this project and liked that it didn't unnecessarily incorporate that gem.
 
 Early on, I committed the cardinal sin of touching migration files (_it was late on a Thursday! I was tired and had stuff to do!_); that should explain any remaining discrepancies inside `db/migrate/*`.
 
